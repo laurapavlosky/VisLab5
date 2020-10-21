@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- D3 -->
+        <script defer src="https://d3js.org/d3.v6.min.js"></script>
+        <!-- My D3 File -->
+        <script defer src="/graph.js"></script>
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <!-- CSS Reset -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <!-- Milligram CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+        <!-- My Style Sheet-->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <title>Lab 5: Update Pattern</title>
+    <h1>Coffee House Chains</h1>
+    <h4>A ranking of selected leading coffee house chains worldwide</h4>
+    <body>
+        <label for="group-by">Group By</label>
+        <select id="group-by">
+            <option value="revenue">Revenue in billion U.S. dollars</option>
+            <option value="stores">Stores worldwide</option>
+
+        </select>
+        <button id = "sort">Sort</button>
+        <div class="chart">
+            <!-- append SVG here -->
+        </div>
+    </body>
+</html>
