@@ -73,16 +73,24 @@ d3.csv('coffee-house-chains.csv', d3.autoType).then(data => {
 
     // (Later) define update parameters 
 
-    let selection = document.querySelector("#group-by");
-    let type = selection.value;
+    let selection1 = document.querySelector("#group-by");
+    let type = selection1.value;
 
-    selection.addEventListener("change", function() {
+    selection1.addEventListener("change", function() {
         type = this.value;
         update(data, type);
     });
 
+    let sort = false;
+    d3.select('#sort').on("click", function() {
+        if (sort == false) {sort = true;}
+        else {sort = false;}
+        update(data, type, sort)
+    })
+
+
     // chart update function
-    function update(data, type) {
+    function update(data, type, sort) {
         console.log('here')
         console.log(type)
 
@@ -114,6 +122,18 @@ d3.csv('coffee-house-chains.csv', d3.autoType).then(data => {
             .remove()
             .transition()
             .duration(1000);
+
+        if (type == 'revenue') {
+            data.sort(function(a,b) {
+                return a.revenue - b.revenue;
+            })
+        }
+
+        if (type == 'stores') {
+            data.sort(function(a,b) {
+                return a.stores - b.stores;
+            })
+        }
 
         svg.select('.yax')
             .remove()
