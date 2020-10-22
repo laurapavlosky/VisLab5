@@ -103,9 +103,9 @@ d3.csv('coffee-house-chains.csv', d3.autoType).then(data => {
         .range([0,height]);
 
         const bars = svg.selectAll('rect')
-            .remove()
-            .exit()
-            .data(data)
+            .data(data,function(d) {
+                return d.company;
+            })
         
         bars.enter()
             .append('rect')
@@ -114,26 +114,34 @@ d3.csv('coffee-house-chains.csv', d3.autoType).then(data => {
             .attr('width', d => xScale.bandwidth(d))
             .attr('height', d => height - yScale(d[type]))
             .attr('fill', '#000')
-            .merge(update)
+        bars.attr('class', 'bar')
+            .merge(bars)
             .transition()
-            .duration(1000);
+            .duration(1000)
+            .attr("x", function(d) {
+                return xScale(d.company);
+              })
+             .attr("y", d=>yScale(d[type]))
+             .attr("width", xScale.bandwidth())
+             .attr("height", d=>height - yScale(d[type]))
+             .style("opacity", 1);
 
         bars.exit()
-            .remove()
             .transition()
-            .duration(1000);
+            .duration(1000)
+            .remove();
 
-        if (type == 'revenue') {
-            data.sort(function(a,b) {
-                return a.revenue - b.revenue;
-            })
-        }
+        // if (type == 'revenue') {
+        //     data.sort(function(a,b) {
+        //         return a.revenue - b.revenue;
+        //     })
+        // }
 
-        if (type == 'stores') {
-            data.sort(function(a,b) {
-                return a.stores - b.stores;
-            })
-        }
+        // if (type == 'stores') {
+        //     data.sort(function(a,b) {
+        //         return a.stores - b.stores;
+        //     })
+        // }
 
         svg.select('.yax')
             .remove()
