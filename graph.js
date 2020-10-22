@@ -91,8 +91,6 @@ d3.csv('coffee-house-chains.csv', d3.autoType).then(data => {
 
     // chart update function
     function update(data, type, sort) {
-        console.log('here')
-        console.log(type)
 
         // update domains
         xScale.domain(data.map(d => d.company)) 
